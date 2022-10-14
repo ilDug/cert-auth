@@ -15,7 +15,6 @@ def generate_private_key(
     print(subject)
 
 
-
 @generate_cmd.command("request")
 def generate_csr():
     pass

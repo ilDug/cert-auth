@@ -29,7 +29,7 @@ CERT_VERIFY = Template("openssl verify -CAfile $capath $crtpath")
 # CERT_VERIFY.substitute(capath=None, crtpath=None)
 
 
-CA_PUB_KEY = Template("openssl x509 -pubkey -noout -in $crtpath -out $pubkypath")
+PUB_KEY_GEN = Template("openssl x509 -pubkey -noout -in $crtpath -out $pubkypath")
 # CA_PUB_KEY.substitute(crtpath=None,pubkypath=None)
 
 CA_KEY_GEN = Template(
@@ -42,5 +42,10 @@ CA_CRT_GEN = Template(
 )
 # CA_CRT_GEN.substitute(days=365,passphrasepath=None,cakeypath=None, cacrtpath=None)
 
-CA_PUB_KEY = Template("openssl x509 -pubkey -noout -in $cacrtpath -out $pubkeypath")
-# CA_PUB_KEY.substitute(cacrtpath=None, pubkeypath=None)
+CA_PUB_KEY_GEN = Template("openssl x509 -pubkey -noout -in $cacrtpath -out $pubkeypath")
+# CA_PUB_KEY_GEN.substitute(cacrtpath=None, pubkeypath=None)
+
+
+# PASSPHRASE_GEN = Template("openssl rand -base64 -out '$passphrasepath' $length")
+PASSPHRASE_GEN = Template("openssl rand -base64  $length")
+# PASSPHRASE_GEN.substitute(passphrasepath=None, length=24)
