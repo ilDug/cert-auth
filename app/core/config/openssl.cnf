@@ -83,7 +83,7 @@ stateOrProvinceName_default     = Italy
 localityName_default            = Sergnano
 organizationName_default        = DagTech
 organizationalUnitName_default  = Dag ITC
-commonName_default              = cripto-dag
+commonName_default              = cert-auth
 emailAddress_default            = dagtech.it@gmail.com
 
 [ v3_ca ]

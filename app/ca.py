@@ -1,15 +1,29 @@
+from distutils.command.install_headers import install_headers
 from pathlib import Path
 import typer
 from core.settings import PKI_PATH
-from cmd.install import install_cmd
+from cmd.install import install_fn, install_with_existing_root
 from cmd.generate import generate_cmd
 
 app = typer.Typer()
 app.add_typer(generate_cmd, name="generate", help="genera un elemento(vedi opzioni)")
-app.add_typer(
-    install_cmd,
-    name="install"
-)
+
+
+@app.command("install")
+def install_cmd(
+    import_root:bool = typer.Option(
+        False,
+        "--import",
+        "-i",
+        help="importa un certificato, la sua chiave privata. Genera tutta l'infrastruttira della PKI importando la chiave ed il certificato root ",
+    )
+):
+    """genera tutta l'infrastruttira della PKI compreso il certificato root"""
+
+    if not import_root:
+        install_fn()
+    else:
+        install_with_existing_root()
 
 
 @app.command()
@@ -35,7 +49,6 @@ def main(ctx: typer.Context):
 
     typer.echo()
     cwd = Path(PKI_PATH)
-    print(cwd)
 
     # controlla che sia installato il sistema di CA
     if not cwd.exists() and ctx.invoked_subcommand != "install":

@@ -37,10 +37,10 @@ class Installer:
     ######################################################################################
 
     def scaffolding(self):
-        PKI_PATH.mkdir(770)
+        PKI_PATH.mkdir(770, exist_ok=True)
 
         for p in [PKI_PATH / d for d in self.dirs]:
-            p.mkdir(770)
+            p.mkdir(770, exist_ok=True)
 
         Path(PKI_PATH / "index.txt").write_text("")
         Path(PKI_PATH / "serial").write_text("1000")
@@ -59,9 +59,9 @@ class Installer:
             passphrasepath=PASSPRHASE_PATH.as_posix(), length=24
         )
         print(cmd)
-        # res = subprocess.run([cmd], stdout=subprocess.PIPE).stdout.decode('utf-8')
+
         os.system(cmd)
-        PASSPRHASE_PATH.chmod(400)
+        # PASSPRHASE_PATH.chmod(400)
 
     ######################################################################################
 
@@ -70,19 +70,20 @@ class Installer:
             passphrasepath=PASSPRHASE_PATH, cakeypath=CA_KEY_PATH
         )
         os.system(cmd)
-        CA_KEY_PATH.chmod(400)
+        # CA_KEY_PATH.chmod(400)
 
     ######################################################################################
 
     def create_ca_crt(self):
         cmd = CA_CRT_GEN.substitute(
-            days=365,
+            configpath=CONFIG_FILE,
             passphrasepath=PASSPRHASE_PATH,
             cakeypath=CA_KEY_PATH,
             cacrtpath=CA_CRT_PATH,
+            days=365,
         )
         os.system(cmd)
-        CA_CRT_PATH.chmod(444)
+        # CA_CRT_PATH.chmod(444)
 
     ######################################################################################
 
@@ -90,3 +91,8 @@ class Installer:
         cmd = CA_PUB_KEY_GEN.substitute(cacrtpath=CA_CRT_PATH, pubkeypath=CA_PUB_PATH)
         os.system(cmd)
         print(CA_PUB_PATH)
+
+    ######################################################################################
+
+    def verify_ca_crt(self):
+        os.system(f"openssl x509 -noout -text -in {CA_CRT_PATH}")

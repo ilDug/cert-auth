@@ -5,7 +5,7 @@ import uuid
 # PKI
 ###############################
 # PKI_PATH = Path(__file__).parents[1] / "PKI"
-PKI_PATH = Path('/PKI')
+PKI_PATH = Path("/PKI")
 KEYS_PATH = PKI_PATH / "private"
 REQS_PATH = PKI_PATH / "reqs"
 CONFIGS_PATH = PKI_PATH / "configs"
