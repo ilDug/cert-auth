@@ -1,0 +1,37 @@
+# version: "3.9"
+
+# services:
+#   cert-auth:
+#     container_name: cert-auth
+#     build: 
+#       context: ./
+#       dockerfile: Dockerfile
+#     restart: 'no'
+#     environment:
+#        MODE: ${MODE:-PRODUCTION} # PRODUCTION || DEVELOPMENT
+#        UNBUFFERED: 1 #mostra i print nel log
+      #  KEY_FILE: /run/secrets/my_secret
+    # ports:
+    #   - 8000:8000
+    # volumes:
+    #   - ./app:/app
+    #   - ./PKI:/PKI
+    #   - /etc/timezone:/etc/timezone:ro
+    #   - /etc/localtime:/etc/localtime:ro
+    # depends_on:
+    #   - db
+    # networks:
+    #   - dagnet
+    # profiles:
+    #  - debug
+    # secrets:
+    #   - my_secret
+
+# networks:
+#   dagnet:
+
+# secrets:
+#   my_secret:
+#     file: ./my_secret.txt
+#   my_other_secret:
+#     external: true
