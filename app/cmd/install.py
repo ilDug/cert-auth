@@ -45,8 +45,13 @@ def install_fn():
 
 def install_with_existing_root():
     """genera tutta l'infrastruttira della PKI importando la chiave ed il certificato root"""
-    raise Exception("metodo non ancora implementato")
-    importer = Importer()
-    importer.import_ca()
-    importer.verify_ca_crt()
-    importer.generate_public_key()
+    _continue = typer.confirm(
+        "verrano sovrascritti il certificato ROOT, la chiave della Ca e la PASSPHRASE. Continuare?",
+        abort=True,
+    )
+
+    if _continue:
+        importer = Importer()
+        importer.import_ca()
+        importer.verify_ca_crt()
+        importer.generate_public_key()

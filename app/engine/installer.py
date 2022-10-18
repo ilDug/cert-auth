@@ -96,3 +96,6 @@ class Installer:
 
     def verify_ca_crt(self):
         os.system(f"openssl x509 -noout -text -in {CA_CRT_PATH}")
+        os.system(
+            f"openssl rsa -check -in {CA_KEY_PATH}  -noout -text -passin file:{PASSPRHASE_PATH}"
+        )

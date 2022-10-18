@@ -8,14 +8,22 @@ from cmd.display import display_cmd
 from cmd.verify import verify_cmd
 
 app = typer.Typer()
-app.add_typer(generate_cmd, name="generate", help="genera un elemento (vedi opzioni)")
 app.add_typer(
-    display_cmd, name="display", help="visualizza gli elementi (vedi opzioni)"
+    generate_cmd,
+    name="generate",
+    help="genera un elemento (vedi opzioni)",
+    no_args_is_help=True,
+)
+app.add_typer(
+    display_cmd,
+    name="display",
+    help="visualizza gli elementi (vedi opzioni)",
+    no_args_is_help=True,
 )
 app.add_typer(verify_cmd, name="verify", help="verifica il certificato (vedi opzioni)")
 
 
-@app.command("install")
+@app.command("install", no_args_is_help=True)
 def install_cmd(
     import_root: bool = typer.Option(
         False,
