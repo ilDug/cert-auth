@@ -4,22 +4,26 @@ from string import Template
 
 
 PRIV_KEY_GEN = Template("openssl genrsa -out $keypath $bits")
-# print(GEN_PRIV_KEY.substitute(keypath=None,bits=2048'))
+# PRIV_KEY_GEN.substitute(keypath=None,bits=2048')
+
+PRIV_KEY_PRINT = Template("openssl rsa  -in $keypath -noout -text")
+# PRIV_KEY_PRINT.substitute(keypath=None')
+
 
 REQ_GEN = Template(
     "openssl req -config $configpath -new -sha256 -verbose -batch -key $keypath -out $csrpath"
 )
-# GEN_REQ.substitute(configpath=None, kaypath=None, csrpath=None)
+# REQ_GEN.substitute(configpath=None, keypath=None, csrpath=None)
 
-REQ_PRINT = Template("openssl req -text -noout -in $crspath")
+REQ_PRINT = Template("openssl req -text -noout -verbose -in $csrpath")
 # REQ_PRINT.substitute(csrpath=None)
 
 
 CERT_GEN = Template(
-    "openssl ca -config $confpath -notext -md sha256 -days $days -verbose -batch -extfile $extpath -extensions req_ext -passin file:'$passphrsepath' -in $crspath -out $crtpath"
+    "openssl ca -config $confpath -notext -md sha256 -days $days -verbose -batch -extfile $extpath -extensions req_ext -passin file:'$passphrsepath' -in $csrpath -out $crtpath"
 )
 # CERT_GEN.substitute(
-#     confpat=None, days=365, extpath=None, passphr=None, crspath=None, crtpath=None
+#     confpat=None, days=365, extpath=None, passphrsepath=None, csrpath=None, crtpath=None
 # )
 
 CERT_PRINT = Template("openssl x509 -noout -text -in $crtpath")
@@ -29,8 +33,11 @@ CERT_VERIFY = Template("openssl verify -CAfile $capath $crtpath")
 # CERT_VERIFY.substitute(capath=None, crtpath=None)
 
 
-PUB_KEY_GEN = Template("openssl x509 -pubkey -noout -in $crtpath -out $pubkypath")
-# CA_PUB_KEY.substitute(crtpath=None,pubkypath=None)
+PUB_KEY_GEN = Template("openssl x509 -pubkey -noout -in $crtpath -out $pubkeypath")
+# PUB_KEY_GEN.substitute(crtpath=None,pubkeypath=None)
+
+PUB_KEY_PRINT = Template("openssl rsa -pubout -in $keypath")
+# PUB_KEY_PRINT.substitute(keypath=None)
 
 CA_KEY_GEN = Template(
     "openssl genrsa -aes256 -passout file:$passphrasepath -out $cakeypath 4096"

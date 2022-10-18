@@ -1,4 +1,6 @@
+from typing import List
 import typer
+from engine.generator import Generator
 from core.settings import KEYS_PATH
 from core.openssl_commands import PRIV_KEY_GEN
 
@@ -12,19 +14,35 @@ def generate_private_key(
     )
 ):
     """genera una chiave privata e la salva nell PKI"""
-    print(subject)
+    g = Generator()
+    g.priv_key(subject)
 
 
 @generate_cmd.command("request")
-def generate_csr():
-    pass
+def generate_csr(
+    subject: str = typer.Argument(
+        ...,
+        help="il nome del soggetto a cui fa riferiment oal chiave privata precedentemente generata",
+    ),
+    alt_names: List[str] = typer.Argument(
+        None, help="lista di COMMON NAME alternativi separata da spazio"
+    ),
+):
+    g = Generator()
+    g.request(subject, alt_names)
 
 
 @generate_cmd.command("certificate")
-def generate_crt():
-    pass
-
-
-@generate_cmd.command("pubkey")
-def generate_pubkey():
-    pass
+def generate_crt(
+    subject: str = typer.Argument(
+        ...,
+        help="il nome del soggetto a cui fa riferiment oal chiave privata precedentemente generata",
+    ),
+    alt_names: List[str] = typer.Argument(
+        None, help="lista di COMMON NAME alternativi separata da spazio"
+    ),
+):
+    g = Generator()
+    g.priv_key(subject)
+    g.request(subject, alt_names)
+    g.certificate(subject, alt_names)

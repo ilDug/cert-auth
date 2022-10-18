@@ -22,6 +22,4 @@ CNF_BASE_DEFAULT = Path(__file__).parents[0] / "config/default.cnf"
 CNF_BASE_OPENSSL = Path(__file__).parents[0] / "config/openssl.cnf"
 
 # PASSPRHASE = config("PASSPRHASE")
-
-
 # ACTIVATION_KEY_LENGTH = config("ACTIVATION_KEY_LENGTH", cast=int)

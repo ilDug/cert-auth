@@ -4,14 +4,20 @@ import typer
 from core.settings import PKI_PATH
 from cmd.install import install_fn, install_with_existing_root
 from cmd.generate import generate_cmd
+from cmd.display import display_cmd
+from cmd.verify import verify_cmd
 
 app = typer.Typer()
-app.add_typer(generate_cmd, name="generate", help="genera un elemento(vedi opzioni)")
+app.add_typer(generate_cmd, name="generate", help="genera un elemento (vedi opzioni)")
+app.add_typer(
+    display_cmd, name="display", help="visualizza gli elementi (vedi opzioni)"
+)
+app.add_typer(verify_cmd, name="verify", help="verifica il certificato (vedi opzioni)")
 
 
 @app.command("install")
 def install_cmd(
-    import_root:bool = typer.Option(
+    import_root: bool = typer.Option(
         False,
         "--import",
         "-i",
@@ -49,9 +55,9 @@ def main(ctx: typer.Context):
 
     typer.echo()
     cwd = Path(PKI_PATH)
-
+    is_empty = not any(cwd.iterdir())
     # controlla che sia installato il sistema di CA
-    if not cwd.exists() and ctx.invoked_subcommand != "install":
+    if (not cwd.exists() or is_empty) and ctx.invoked_subcommand != "install":
         exit_msg = typer.style(
             "prima di utilizzare il programma esegui l'inizializzazione con il comando 'install'",
             fg=typer.colors.BRIGHT_RED,

@@ -61,7 +61,7 @@ class Installer:
         print(cmd)
 
         os.system(cmd)
-        # PASSPRHASE_PATH.chmod(400)
+        PASSPRHASE_PATH.chmod(400)
 
     ######################################################################################
 
@@ -70,7 +70,7 @@ class Installer:
             passphrasepath=PASSPRHASE_PATH, cakeypath=CA_KEY_PATH
         )
         os.system(cmd)
-        # CA_KEY_PATH.chmod(400)
+        CA_KEY_PATH.chmod(400)
 
     ######################################################################################
 
@@ -80,10 +80,10 @@ class Installer:
             passphrasepath=PASSPRHASE_PATH,
             cakeypath=CA_KEY_PATH,
             cacrtpath=CA_CRT_PATH,
-            days=365,
+            days=3650,
         )
         os.system(cmd)
-        # CA_CRT_PATH.chmod(444)
+        CA_CRT_PATH.chmod(444)
 
     ######################################################################################
 
