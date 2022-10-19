@@ -20,10 +20,10 @@ app.add_typer(
     help="visualizza gli elementi (vedi opzioni)",
     no_args_is_help=True,
 )
-app.add_typer(verify_cmd, name="verify", help="verifica il certificato (vedi opzioni)")
+app.add_typer(verify_cmd, name="verify", help="verifica il certificato (vedi opzioni)", no_args_is_help=True)
 
 
-@app.command("install", no_args_is_help=True)
+@app.command("install", no_args_is_help=False)
 def install_cmd(
     import_root: bool = typer.Option(
         False,
