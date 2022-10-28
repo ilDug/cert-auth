@@ -43,7 +43,7 @@ jobs:
       run: docker build . --file Dockerfile.prod --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
       
     - name: Tagging image
-      run: dockerd tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }} 
+      run: docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }} 
       # run: echo '::set-output name=SELECTED_COLOR::green'
 
     - name: Push to GHRC.IO
