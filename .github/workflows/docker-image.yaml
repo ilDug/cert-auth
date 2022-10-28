@@ -24,13 +24,10 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v3
-      
-    - name: Get tag from commit
+
+    - name: Get the version
       id: tag
-      uses: ilDug/get-tag-action@v1.0.4
-      with:
-        # Optionally strip `v` prefix
-        strip_v: true
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}          
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v2
@@ -38,15 +35,14 @@ jobs:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-          
     - name: Build image
       run: docker build . --file Dockerfile.prod --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
       
     - name: Tagging image
-      run: docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }} 
+      run: docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.VERSION }} 
       # run: echo '::set-output name=SELECTED_COLOR::green'
 
     - name: Push to GHRC.IO
       # run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }}
+      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.VERSION }}
 
