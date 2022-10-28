@@ -27,7 +27,7 @@ jobs:
       
     - name: Get tag from commit
       id: tag
-      uses: ilDug/get-tag-action@v1.0.3
+      uses: ilDug/get-tag-action@v1.0.4
       with:
         # Optionally strip `v` prefix
         strip_v: true
