@@ -3,7 +3,7 @@ name: Docker Image CI (build, tag, push)
 
 on:
   push:
-    branches: [ "main" ]
+    # branches: [ "main" ]
     tags: [ 'v*.*.*' ]
     
     
@@ -27,7 +27,7 @@ jobs:
       
     - name: Get tag from commit
       id: tag
-      uses: dawidd6/action-get-tag@v1
+      uses: ilDug/get-tag-action@v1
       with:
         # Optionally strip `v` prefix
         strip_v: true
