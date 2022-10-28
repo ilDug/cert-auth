@@ -39,9 +39,11 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
           
-    - name: Build the Docker image
-      - run: docker build . --file Dockerfile.prod --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
-      - run: dockerd tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }} 
+    - name: Build image
+      run: docker build . --file Dockerfile.prod --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
+      
+    - name: Tagging image
+      run: dockerd tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.tag }} 
       # run: echo '::set-output name=SELECTED_COLOR::green'
 
     - name: Push to GHRC.IO
