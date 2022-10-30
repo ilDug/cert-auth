@@ -1,6 +1,8 @@
 docker run -it --rm  -v ${pwd}/app:/app -v ${pwd}/PKI:/PKI ildug/cert-auth
 
 docker run -it --rm -v ${pwd}/PKI:/PKI ildug/cert-auth
+docker run -it --rm -v ${pwd}/PKI:/PKI ghcr.io/ildug/cert-auth:v1.1.11
+
 
 docker run -it --rm -v ${pwd}/PKI:/PKI -v ${pwd}/import:/import ildug/cert-auth
 
