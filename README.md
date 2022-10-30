@@ -25,7 +25,7 @@ In your folder run the container and execute the aplication.
 
 ```bash
 # on MacOs
-docker run -it --rm -v "$PWD/PKI":"/PKI" ghcr.io/ildug/cert-auth:<VERSION>
+docker run -it --rm -v $(pwd)/PKI:/PKI ghcr.io/ildug/cert-auth:<VERSION>
 
 # on Windows
 docker run -it --rm -v ${pwd}/PKI:/PKI ghcr.io/ildug/cert-auth:<VERSION>
@@ -39,8 +39,9 @@ Below the common commands.
 - create a folder named ```import``` and  place your existing root certificate (with .crt extension) and the related private key (with .key extension). Please no put other files into it.
 
 run these command: 
-```
-docker run -it --rm -v ${pwd}/PKI:/PKI -v ${pwd}/import:/import ghcr.io/ildug/cert-auth:<VERSION>
+```bash
+# on MacOs
+docker run -it --rm -v $(pwd)/PKI:/PKI -v $(pwd)/import:/import ghcr.io/ildug/cert-auth:<VERSION>
 ```
 
 # Commands
