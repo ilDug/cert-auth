@@ -20,13 +20,13 @@ commonName                      = Common Name (e.g. server FQDN or YOUR name)
 # emailAddress                    = Email Address
 
 # Optionally, specify some defaults.
-# countryName_default             = IT
-# stateOrProvinceName_default     = Italy
-# localityName_default            = Sergnano
-# organizationName_default        = DagTech
-# organizationalUnitName_default  = Dag LAN
+# countryName_default             = xxx
+# stateOrProvinceName_default     = xxx
+# localityName_default            = xxx
+# organizationName_default        = xxx
+# organizationalUnitName_default  = xxx 
 commonName_default              = __subject__
-# emailAddress_default            = dagtech.it@gmail.com
+# emailAddress_default            = xxx
 
 
 
