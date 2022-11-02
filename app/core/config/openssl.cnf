@@ -80,11 +80,11 @@ emailAddress                    = Email Address
 # Optionally, specify some defaults.
 countryName_default             = IT
 stateOrProvinceName_default     = Italy
-localityName_default            = Sergnano
-organizationName_default        = DagTech
-organizationalUnitName_default  = Dag ITC
-commonName_default              = cert-auth
-emailAddress_default            = dagtech.it@gmail.com
+# localityName_default            = xxx
+# organizationName_default        = xxx
+# organizationalUnitName_default  = xxx
+# commonName_default              = xxx
+# emailAddress_default            = xxx
 
 [ v3_ca ]
 # Extensions for a typical CA (`man x509v3_config`).
